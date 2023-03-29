@@ -23,6 +23,6 @@ const renderLeads = () => {
       </li>
     `;
   }
-  
+
   leads.innerHTML = itemsList;
-}
+};
