@@ -1,7 +1,11 @@
 const inputEl = document.querySelector("#inputEl");
 const saveButton = document.querySelector("#saveButton");
+const deleteButton = document.querySelector("#deleteButton");
 const leads = document.querySelector("#leads");
 let myLeads = [];
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+
+// Save lead
 
 const saveLead = () => {
   myLeads.push(inputEl.value);
@@ -11,6 +15,8 @@ const saveLead = () => {
 };
 
 saveButton.addEventListener("click", saveLead);
+
+// Render leads
 
 const renderLeads = () => {
   let itemsList = "";
@@ -28,9 +34,19 @@ const renderLeads = () => {
   leads.innerHTML = itemsList;
 };
 
-const getLeadsFromLocalStorage = () => {
-  let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+// Delete all leads
 
+const deleteAllLeads = () => {
+  localStorage.clear();
+  myLeads = [];
+  renderLeads();
+};
+
+deleteButton.addEventListener("click", deleteAllLeads);
+
+// Get leads from local storage
+
+const getLeadsFromLocalStorage = () => {
   if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage;
     renderLeads();

@@ -18,13 +18,22 @@ input {
 }
 
 button {
-  background-color: #5f9341;
-  border: none;
-  color: #fff;
   cursor: pointer;
   font-weight: bold;
   padding: 15px 20px;
   margin-bottom: 20px;
+}
+
+#saveButton {
+  background-color: #5f9341;
+  border: 1px solid #5f9341;
+  color: #fff;
+}
+
+#deleteButton {
+  background-color: transparent;
+  border: 1px solid #5f9341;
+  color: #5f9341;
 }
 
 ul {
