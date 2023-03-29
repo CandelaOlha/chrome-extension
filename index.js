@@ -1,11 +1,12 @@
 const inputEl = document.querySelector("#inputEl");
 const saveButton = document.querySelector("#saveButton");
-let myLeads = [];
 const leads = document.querySelector("#leads");
+let myLeads = [];
 
 const saveLead = () => {
   myLeads.push(inputEl.value);
   inputEl.value = "";
+  localStorage.setItem("myLeads", JSON.stringify(myLeads));
   renderLeads();
 };
 
@@ -26,3 +27,14 @@ const renderLeads = () => {
 
   leads.innerHTML = itemsList;
 };
+
+const getLeadsFromLocalStorage = () => {
+  let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+
+  if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage;
+    renderLeads();
+  }
+};
+
+getLeadsFromLocalStorage();
