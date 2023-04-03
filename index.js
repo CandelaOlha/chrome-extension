@@ -1,9 +1,32 @@
 const inputEl = document.querySelector("#inputEl");
 const saveButton = document.querySelector("#saveButton");
 const deleteButton = document.querySelector("#deleteButton");
-const leads = document.querySelector("#leads");
+const leadsUlEl = document.querySelector("#leadsUlEl");
 let myLeads = [];
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+
+// Render leads
+
+const render = (leads) => {
+  let itemsList = "";
+
+  for (let i = 0; i < leads.length; i++) {
+    itemsList += `
+      <li>
+        <a href='${leads[i]}' target='_blank'>
+          ${leads[i]}
+        </a>
+      </li>
+    `;
+  }
+
+  leadsUlEl.innerHTML = itemsList;
+};
+
+if (leadsFromLocalStorage) {
+  myLeads = leadsFromLocalStorage;
+  render(myLeads);
+}
 
 // Save lead
 
@@ -11,35 +34,17 @@ const saveLead = () => {
   myLeads.push(inputEl.value);
   inputEl.value = "";
   localStorage.setItem("myLeads", JSON.stringify(myLeads));
-  renderLeads();
+  render(myLeads);
 };
 
 saveButton.addEventListener("click", saveLead);
-
-// Render leads
-
-const renderLeads = () => {
-  let itemsList = "";
-
-  for (let i = 0; i < myLeads.length; i++) {
-    itemsList += `
-      <li>
-        <a href='${myLeads[i]}' target='_blank'>
-          ${myLeads[i]}
-        </a>
-      </li>
-    `;
-  }
-
-  leads.innerHTML = itemsList;
-};
 
 // Delete all leads
 
 const deleteAllLeads = () => {
   localStorage.clear();
   myLeads = [];
-  renderLeads();
+  render(myLeads);
 };
 
 deleteButton.addEventListener("click", deleteAllLeads);
@@ -49,7 +54,7 @@ deleteButton.addEventListener("click", deleteAllLeads);
 const getLeadsFromLocalStorage = () => {
   if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage;
-    renderLeads();
+    render(myLeads);
   }
 };
 
