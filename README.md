@@ -9,5 +9,3 @@ This is the last project I did for the Javascript course I'm taking at [Scrimba]
 * HTML
 * CSS
 * Javascript
-
-You can get the extension here: [Leads tracker extension](chrome://extensions/?id=megagalfadaddckjnejjkckmkfhdompl)
