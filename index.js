@@ -1,5 +1,6 @@
 const inputEl = document.querySelector("#inputEl");
-const saveButton = document.querySelector("#saveButton");
+const saveInputButton = document.querySelector("#saveInputButton");
+const saveTabButton = document.querySelector("#saveTabButton");
 const deleteButton = document.querySelector("#deleteButton");
 const leadsUlEl = document.querySelector("#leadsUlEl");
 let myLeads = [];
@@ -37,7 +38,19 @@ const saveLead = () => {
   render(myLeads);
 };
 
-saveButton.addEventListener("click", saveLead);
+saveInputButton.addEventListener("click", saveLead);
+
+// Save tab
+
+const saveTab = () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    myLeads.push(tabs[0].url);
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+    render(myLeads);
+  });
+};
+
+saveTabButton.addEventListener("click", saveTab);
 
 // Delete all leads
 
